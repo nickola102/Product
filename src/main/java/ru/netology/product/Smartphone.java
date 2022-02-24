@@ -1,6 +1,6 @@
 package ru.netology.product;
 
-public class Smartphone extends Product{
+public class Smartphone extends Product {
 
     private String name;
     private String manufacturer;
@@ -16,10 +16,12 @@ public class Smartphone extends Product{
         this.manufacturer = manufacturer;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
