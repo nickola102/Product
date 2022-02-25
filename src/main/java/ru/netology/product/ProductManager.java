@@ -1,11 +1,18 @@
 package ru.netology.product;
 
+import ru.netology.repository.ProductRepository;
+
 public class ProductManager {
-    // добавьте необходимые поля, конструкторы и методы
+
+    private ProductRepository repository;
+
+    public ProductManager(ProductRepository repository) {
+        this.repository = repository;
+    }
 
     public Product[] searchBy(String text) {
         Product[] result = new Product[0]; // тут будем хранить подошедшие запросу продукты
-        for (Product product: repository.findAll()) {
+        for (Product product : repository.findAll()) {
             if (matches(product, text)) {
                 // "добавляем в конец" массива result продукт product
             }
@@ -23,4 +30,6 @@ public class ProductManager {
         // или в одну строку:
         // return product.getName().contains(search);
     }
+
+
 }
