@@ -5,12 +5,12 @@ import ru.netology.product.Product;
 public class ProductRepository {
     private Product[] items = new Product[0];
 
-    public void save(Product item) {
+    public void save(Product product) {
         int length = items.length + 1;
         Product[] tmp = new Product[length];
         System.arraycopy(items, 0, tmp, 0, items.length);
         int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = item;
+        tmp[lastIndex] = product;
         items = tmp;
     }
 
@@ -22,9 +22,9 @@ public class ProductRepository {
         int length = items.length - 1;
         Product[] tmp = new Product[length];
         int index = 0;
-        for (Product item : items) {
-            if (item.getId() != id) {
-                tmp[index] = item;
+        for (Product product : items) {
+            if (product.getId() != id) {
+                tmp[index] = product;
                 index++;
             }
         }

@@ -7,41 +7,88 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductManagerTest {
 
+    private ProductRepository repository = new ProductRepository();
+    private ProductManager product = new ProductManager(repository);
 
-    Product first = new Product(1354, "1984", 300);
-    Product second = new Product(2687, "Hard Rock Cafe", 800);
-    Product third = new Product(3235, "6S Plus", 25000);
-    Product forth = new Product(435, "Harry Potter", 600);
-    Product fifth = new Product(568, "Blade", 15000);
-    Product sixth = new Product(6254, "A19", 18000);
-    Book seventh = new Book("George Orwell");
-    Smartphone eighth = new Smartphone("ZTE");
-    private ProductRepository repository;
-
+    Product first = new Book(1354, "1984", 300, "George Orwell");
+    Product second = new Book(2687, "20,000 Leagues Under the Sea", 800, "Jules Verne");
+    Product third = new Smartphone(3235, "6S Plus", 25000, "Apple");
+    Product forth = new Book(435, "Harry Potter", 600, "J. K. Rowling");
+    Product fifth = new Smartphone(568, "Blade", 15000, "ZTE");
+    Product sixth = new Smartphone(6254, "Galaxy A19", 18000, "Samsung");
 
     @Test
-    public void shouldSearchBy() {
+    public void shouldAddProducts() {
 
-        ProductManager manager = new ProductManager(repository);
-        String text = "19";
+        product.add(first);
+        product.add(second);
+        product.add(third);
+        product.add(forth);
+        product.add(fifth);
+        product.add(sixth);
 
-        repository.save(first);
-        repository.save(second);
-        repository.save(third);
-        repository.save(forth);
-        repository.save(fifth);
-        repository.save(sixth);
-
-        manager.searchBy(text);
-
-        Product[] expected = {first, sixth};
+        Product[] expected = {first, second, third, forth, fifth, sixth};
         Product[] actual = repository.findAll();
-
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void matches() {
+    public void shouldAddBooks() {
+
+        product.add(first);
+        product.add(second);
+        product.add(forth);
+
+        Product[] expected = {first, second, forth};
+        Product[] actual = repository.findAll();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAddSmartphones() {
+
+        product.add(third);
+        product.add(fifth);
+        product.add(sixth);
+
+        Product[] expected = {third, fifth, sixth};
+        Product[] actual = repository.findAll();
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSearchBy1() {
+
+        product.add(first);
+        product.add(second);
+        product.add(third);
+        product.add(forth);
+        product.add(fifth);
+        product.add(sixth);
+
+        Product[] expected = {first, sixth};
+        Product[] actual = product.searchBy("19");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldSearchBy2() {
+
+        product.add(first);
+        product.add(second);
+        product.add(third);
+        product.add(forth);
+        product.add(fifth);
+        product.add(sixth);
+
+        Product[] expected = {fifth, sixth};
+        Product[] actual = product.searchBy("la");
+
+        assertArrayEquals(expected, actual);
     }
 }
+

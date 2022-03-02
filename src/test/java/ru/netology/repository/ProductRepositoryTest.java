@@ -1,21 +1,26 @@
 package ru.netology.repository;
 
 import org.junit.jupiter.api.Test;
+import ru.netology.product.Book;
 import ru.netology.product.Product;
+import ru.netology.product.Smartphone;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductRepositoryTest {
 
-    Product first = new Product(1354, "1984", 300);
-    Product second = new Product(2687, "Hard Rock Cafe", 800);
-    Product third = new Product(3235, "6S Plus", 25000);
-    Product forth = new Product(435, "Harry Potter", 600);
-    Product fifth = new Product(568, "Blade", 15000);
+    ProductRepository repository = new ProductRepository();
+
+    Product first = new Book(1354, "1984", 300, "George Orwell");
+    Product second = new Book(2687, "20,000 Leagues Under the Sea", 800, "Jules Verne");
+    Product third = new Smartphone(3235, "6S Plus", 25000, "Apple");
+    Product forth = new Book(435, "Harry Potter", 600, "J. K. Rowling");
+    Product fifth = new Smartphone(568, "Blade", 15000, "ZTE");
+    Product sixth = new Smartphone(6254, "Galaxy A19", 18000, "Samsung");
 
     @Test
     void shouldFindAll() {
-        ProductRepository repository = new ProductRepository();
+
         repository.save(first);
         repository.save(second);
         repository.save(third);
@@ -24,12 +29,11 @@ class ProductRepositoryTest {
         Product[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
-
     }
 
     @Test
     void shouldRemoveById() {
-        ProductRepository repository = new ProductRepository();
+
         repository.save(first);
         repository.save(second);
         repository.save(third);
@@ -42,6 +46,5 @@ class ProductRepositoryTest {
         Product[] actual = repository.findAll();
 
         assertArrayEquals(expected, actual);
-
     }
 }
