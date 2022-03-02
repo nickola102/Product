@@ -1,6 +1,10 @@
-package ru.netology.product;
+package ru.netology.manager;
 
 import org.junit.jupiter.api.Test;
+import ru.netology.manager.ProductManager;
+import ru.netology.product.Book;
+import ru.netology.product.Product;
+import ru.netology.product.Smartphone;
 import ru.netology.repository.ProductRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,7 +64,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void shouldSearchBy1() {
+    void shouldSearchBy() {
 
         product.add(first);
         product.add(second);
@@ -76,7 +80,7 @@ class ProductManagerTest {
     }
 
     @Test
-    void shouldSearchBy2() {
+    void shouldSearchNoOne() {
 
         product.add(first);
         product.add(second);
@@ -85,8 +89,8 @@ class ProductManagerTest {
         product.add(fifth);
         product.add(sixth);
 
-        Product[] expected = {fifth, sixth};
-        Product[] actual = product.searchBy("la");
+        Product[] expected = {};
+        Product[] actual = product.searchBy("super");
 
         assertArrayEquals(expected, actual);
     }
